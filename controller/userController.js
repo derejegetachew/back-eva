@@ -1,7 +1,6 @@
 const dbConnection = require("../db/dbConfig");
 const bycrpt =require("bcrypt")
 const jwt = require('jsonwebtoken');
-
 const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 async function register(req,res){
 const {username,firstname,lastname,email,password}=req.body

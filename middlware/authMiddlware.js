@@ -11,7 +11,6 @@ async function authMiddleware(req, res, next) {
     const token = authHeader.split(" ")[1];
     console.log(authHeader);
     console.log("Received Token:", token); // Log the received token
-
     try {
         // Verify the token
         const { username, userid } = jwt.verify(token,process.env.JWT_SECRET);
