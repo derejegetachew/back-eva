@@ -1,7 +1,8 @@
 const dbConnection = require("../db/dbConfig");
 const bycrpt =require("bcrypt")
-const { StatusCodes, ReasonPhrases } = require('http-status-codes');
+const jwt = require('jsonwebtoken');
 
+const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 async function register(req,res){
 const {username,firstname,lastname,email,password}=req.body
 if(!username|| !firstname|| !lastname|| !email|| !password){
@@ -30,7 +31,9 @@ return res.status(201).json({msg:"User registered successfully"})
 }
 }
 async function checkUser(req,res){
-   
+  const username=req.user.username
+  const userid=req.user.userid
+   res.status(200).json({msg:"valid user",username,userid})
 }
 async function login(req,res){
   const {email,password}=req.body
@@ -49,9 +52,16 @@ if (rows.length === 0) {
 // }
 const ismatch=await bycrpt.compare(password,rows[0].password)
 if(!ismatch){
-    return res.status(400).json({msg:"invalid creditnal"})
+    return res.status(400).json({msg:"password is wrong"})
+    
 }
-return res.status.json({rows:rows[0].password})
+const username=rows[0].username;
+const userid=rows[0].userid;
+const token=jwt.sign({username,userid},process.env.JWT_SECRET,{expiresIn:"1d"})
+return res.status(200).json({
+  msg:"user login successful",token
+})
+// return res.status(400).json({rows:rows[0].password})
   }catch(error){
     console.log(error.message)
     return res.status(500).json({msg:"some thing wrong try agian later"})

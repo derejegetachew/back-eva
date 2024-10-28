@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const userRoute = require("./routes/userRoute");
 const dbConnection = require("./db/dbConfig");
+require('dotenv').config();
+
 const port = 5000;
 //json middleware  to extract jsion data 
 app.use(express.json())
