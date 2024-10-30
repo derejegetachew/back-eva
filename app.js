@@ -21,8 +21,8 @@ app.use("/api/question",authMiddleware, questionRouter);
 // Execute DB Query on Server Start
 async function start() {
     try {
-        // console.log("Attempting to execute query...");
-        // const result = await dbConnection.execute("select 'test1' ");
+        //  console.log("Attempting to execute query...");
+        //  const result = await dbConnection.execute("select 'test1' ");
         app.listen(port)
         console.log(`database connection establshed ${port} `)
         console.log("Query executed successfully!");

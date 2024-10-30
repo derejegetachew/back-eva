@@ -25,6 +25,6 @@ const dbConnection=mysql2.createPool({
     connectionLimit:10
     
 })
-console.log(process.env.DATABASE)
+console.log(process.env.USER)
 
 module.exports=dbConnection.promise()
