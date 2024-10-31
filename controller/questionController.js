@@ -9,7 +9,6 @@ async function addQuestion(req, res) {
     if (!questionid || !userid || !title || !description || !tag) {
         return res.status(400).json({ msg: "Please provide all required fields." });
     }
-
     try {
         const query = `
             INSERT INTO questions (questionid, userid, title, description, tag)
@@ -29,7 +28,6 @@ async function addQuestion(req, res) {
         return res.status(500).json({ msg: "Failed to add question, try again later." });
     }
 }
-
 module.exports = {
     addQuestion,
 };
